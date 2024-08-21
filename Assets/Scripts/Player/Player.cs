@@ -87,6 +87,8 @@ public class Player : MonoBehaviour
     Animator animator;
 
     readonly int IsMove_Hash = Animator.StringToHash("IsMove");
+    readonly int IsUse_Hash = Animator.StringToHash("Use");
+
 
 
     private void Awake()
@@ -103,6 +105,9 @@ public class Player : MonoBehaviour
             isGrounded = isGround;
             //Debug.Log(isGrounded);
         };
+
+        UseSensor useSensor = GetComponentInChildren<UseSensor>();
+        useSensor.onUse += (usable) =. usleL
     }
 
     private void OnEnable()
@@ -147,6 +152,11 @@ public class Player : MonoBehaviour
         Jump();
     }
 
+    void OnUseInput(InputAction.CallbackContext context)
+    {
+
+    }
+
     private void Update()
     {
         JumpCoolRemains -= Time.deltaTime; // 점프 쿨타임 줄이기
@@ -186,5 +196,13 @@ public class Player : MonoBehaviour
             rigidBody.AddForce(jumpPower * Vector3.up, ForceMode.Impulse);
             JumpCoolRemains = jumpCoolTime;
         }
+    }
+
+    /// <summary>
+    /// 상호작용 관련 처리용 함수
+    /// </summary>
+    void Use()
+    {
+        animator.SetTrigger(IsUse_Hash);    // 
     }
 }
