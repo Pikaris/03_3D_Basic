@@ -12,10 +12,10 @@ public class UseSensor : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // 부모중에 IInteractable  인터페이스를 상속받은 클래스가 있으면 
+        //부모중에 IInteractable  인터페이스를 상속받은 클래스가 있으면
         IInteractable usable = other.GetComponentInParent<IInteractable>();
 
-        if(usable != null )
+        if (usable != null)
         {
             onUse?.Invoke(usable);  // 신호 보내기
         }

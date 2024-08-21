@@ -107,7 +107,7 @@ public class Player : MonoBehaviour
         };
 
         UseSensor useSensor = GetComponentInChildren<UseSensor>();
-        useSensor.onUse += (usable) =. usleL
+        useSensor.onUse += (usable) => usable.Use();        // 사용 시도 신호가 들어오면 사용한다.
     }
 
     private void OnEnable()
@@ -116,10 +116,13 @@ public class Player : MonoBehaviour
         inputActions.Player.Move.performed += OnMoveInput;
         inputActions.Player.Move.canceled += OnMoveInput;
         inputActions.Player.Jump.performed += OnJumpInput;
+        inputActions.Player.Use.performed += OnUseInput;
     }
+
 
     private void OnDisable()
     {
+        inputActions.Player.Use.performed -= OnUseInput;
         inputActions.Player.Jump.performed -= OnJumpInput;
         inputActions.Player.Move.canceled -= OnMoveInput;
         inputActions.Player.Move.performed -= OnMoveInput;
@@ -152,9 +155,10 @@ public class Player : MonoBehaviour
         Jump();
     }
 
-    void OnUseInput(InputAction.CallbackContext context)
-    {
 
+    private void OnUseInput(InputAction.CallbackContext context)
+    {
+        Use();
     }
 
     private void Update()
