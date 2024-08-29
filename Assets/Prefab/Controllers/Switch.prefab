@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.4, z: 0}
-  m_LocalScale: {x: 1, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6098274767866435788}
@@ -236,7 +236,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.54, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9067647678056241998}
@@ -253,9 +253,9 @@ GameObject:
   - component: {fileID: 1253234248088564205}
   - component: {fileID: 1633758016408683230}
   - component: {fileID: 4226022455791498472}
-  - component: {fileID: 1021318436240423645}
+  - component: {fileID: 6584080951629447038}
   m_Layer: 0
-  m_Name: SwitchDoor
+  m_Name: Switch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -319,7 +319,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 6, z: 1}
   m_Center: {x: 0, y: 1.2, z: 0}
---- !u!114 &1021318436240423645
+--- !u!114 &6584080951629447038
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -328,11 +328,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4472396373727645905}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1d923e7ce1b723429024be8120abaee, type: 3}
+  m_Script: {fileID: 11500000, guid: 92ad415e0c2005145902dd015a3cb39f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   coolTime: 0.5
-  targetDoor: {fileID: 0}
+  targetObject: {fileID: 0}
 --- !u!1 &8526178419098847695
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,7 +359,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 89444118269395552}

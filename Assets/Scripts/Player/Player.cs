@@ -7,7 +7,7 @@ using UnityEngine.Animations;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IPlatformRide
 {
     // 플레이어가 WASD입력을 받아서 이동한다.(액션 이름은 Move)
     // WS로 전진/후진
@@ -161,7 +161,6 @@ public class Player : MonoBehaviour
         Jump();
     }
 
-
     private void OnUseInput(InputAction.CallbackContext context)
     {
         Use();
@@ -264,5 +263,14 @@ public class Player : MonoBehaviour
             yield return null;
         }
         speedModifier = 1.0f;
+    }
+
+    /// <summary>
+    /// 플랫폼 움직임에 따라 같이 움직이게 하는 함수
+    /// </summary>
+    /// <param name="moveDelta">플랫폼이 움직인 양</param>
+    public void OnRidePlatform(Vector3 moveDelta)
+    {
+        rigidBody.MovePosition(rigidBody.position + moveDelta);
     }
 }

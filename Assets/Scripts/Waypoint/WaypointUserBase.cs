@@ -42,7 +42,7 @@ public class WaypointUserBase : MonoBehaviour
     /// <summary>
     /// 현재 목표지점에 근접했는지 확인해주는 프로퍼티(true면 도착, false면 도착하지 않음)
     /// </summary>
-    bool IsArrived
+    protected virtual bool IsArrived
     {
         get
         {
@@ -53,35 +53,22 @@ public class WaypointUserBase : MonoBehaviour
     protected virtual void Start()
     {
         //Target = targetWaypoints.GetNextWaypoint();
-        Target = targetWaypoints.CurrtentWaypoint;
+        Target = targetWaypoints.CurrtentWaypoint;      // 첫번째 Target 지정
     }
-
-
-    //private void Update()
-    //{
-    //    if (!IsArrived)
-    //    {
-    //        transform.Translate(moveSpeed * Time.deltaTime * moveDirection);
-    //    }
-    //    else
-    //    {
-    //        Target = targetWaypoints.GetNextWaypoint();
-    //    }
-    //}
 
     private void FixedUpdate()
     {
-        OnMove();
+        OnMove(moveSpeed * Time.fixedDeltaTime * moveDirection);
     }
 
     /// <summary>
     /// 이동 처리용 함수
     /// </summary>
-    protected virtual void OnMove()
+    protected virtual void OnMove(Vector3 moveDelta)
     {
         // 항상 Target방향으로 움직이고 웨이포인트 지점에 도착하면 다음 Target 설정
-        transform.Translate(moveSpeed * Time.fixedDeltaTime * moveDirection, Space.World);
-        //Vector3.MoveTowards() : 정확한 위치로 갈 수 있지만 Root연산이 들어간다
+        transform.Translate(moveDelta, Space.World);
+        //Vector3.MoveTowards() : 정확한 위치로 갈 수 있지만 root연산이 들어간다
 
         if(IsArrived)
         {

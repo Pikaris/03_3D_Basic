@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwitchDoor : MonoBehaviour
+public class SwitchBase : MonoBehaviour, IInteractable
 {
     // on 상태, off 상태
     // 사용하면 on/off가 번갈아가면서 설정된다
@@ -16,9 +16,14 @@ public class SwitchDoor : MonoBehaviour
     public float coolTime = 0.5f;
 
     /// <summary>
-    /// 이 스위치가 열 수 있는 문
+    /// 이 스위치가 사용할 오브젝트
     /// </summary>
-    public DoorManualBase targetDoor;
+    public GameObject targetObject;
+
+    /// <summary>
+    /// targetObject가 상속받은 IInteractable
+    /// </summary>
+    IInteractable target;
 
     /// <summary>
     /// 현재 남아있는 쿨타임
@@ -44,13 +49,13 @@ public class SwitchDoor : MonoBehaviour
         set
         {
             isOn = value;
-            if (targetDoor != null)
+            if (target != null)
             {
-                targetDoor.Use();
+                target.Use();
             }
             else
             {
-                Debug.LogWarning("사용할 문이 없습니다.");
+                Debug.LogWarning("사용할 오브젝트가 없습니다.");
             }
             animator.SetBool(On_Hash, isOn);
         }
@@ -63,6 +68,18 @@ public class SwitchDoor : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
+    }
+
+    private void Start()
+    {
+        if (targetObject != null)
+        {
+            target = targetObject.GetComponent<IInteractable>();
+        }
+        else
+        {
+            Debug.LogWarning("사용할 오브젝트가 없습니다.");
+        }
     }
 
     private void Update()
@@ -79,3 +96,4 @@ public class SwitchDoor : MonoBehaviour
         }
     }
 }
+
