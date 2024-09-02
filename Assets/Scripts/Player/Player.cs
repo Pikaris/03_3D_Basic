@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour, IPlatformRide
 {
@@ -92,6 +93,8 @@ public class Player : MonoBehaviour, IPlatformRide
     Rigidbody rigidBody;
     Animator animator;
 
+    Transform tempTrans;
+
     readonly int IsMove_Hash = Animator.StringToHash("IsMove");
     readonly int IsUse_Hash = Animator.StringToHash("Use");
 
@@ -114,6 +117,11 @@ public class Player : MonoBehaviour, IPlatformRide
 
         UseSensor useSensor = GetComponentInChildren<UseSensor>();
         useSensor.onUse += (usable) => usable.Use();        // 사용 시도 신호가 들어오면 사용한다.
+
+        if (tempTrans != null)
+        {
+            transform.position = tempTrans.position;
+        }
     }
 
     private void OnEnable()
@@ -220,6 +228,8 @@ public class Player : MonoBehaviour, IPlatformRide
     /// </summary>
     public void Die()
     {
+        tempTrans = transform;
+        SceneManager.LoadScene("PlayerDead");
         Debug.Log("플레이어 죽음");
     }
 
