@@ -8,7 +8,7 @@ using UnityEngine;
 public class CellBase
 {
     /// <summary>
-    /// 이 셀에 있는 길을 기록하는 변수(북동남서 순서대로 비트 설정)
+    /// 이 셀에 있는 길을 기록하는 변수(북동남서 순서대로 비트 설정, 1로 설정되어 있으면)
     /// </summary>
     PathDirection path;
 
@@ -55,7 +55,7 @@ public class CellBase
     /// <param name="newPath">새롭게 길이 열릴 방향</param>
     public void MakePath(PathDirection newPath)
     {
-        
+        path |= newPath;
     }
 
     /// <summary>
@@ -65,7 +65,7 @@ public class CellBase
     /// <returns>true면 길이다. false면 벽이다.</returns>
     public bool IsPath(PathDirection direction)
     {
-        return false;
+        return (path & direction) != 0;
     }
 
     /// <summary>
@@ -75,11 +75,11 @@ public class CellBase
     /// <returns>true면 벽이다. false면 길이다.</returns>
     public bool IsWall(PathDirection direction)
     {
-        return false;
+        return (path & direction) == 0;
     }
 
     /// <summary>
-    /// 코너 체크용 함수
+    /// dir1, dir2가 코너를 이루는지 확인하는 함수
     /// </summary>
     /// <param name="dir1">확인할 방향1</param>
     /// <param name="dir2">확인할 방향2</param>
